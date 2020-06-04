@@ -1,0 +1,16 @@
+{% extends "base_afvink4.html" %}
+
+{% block title %} Converter {% endblock %}
+
+{% block content %}
+<h1> Converter </h1>
+<form method="get">
+    <p> Give your sequence:
+    <input type="text" name="seq">
+    </p>
+    <p>Translation:
+        {{ translate }}
+    </p>
+    <button type="submit"> Submit </button>
+</form>
+{% endblock %}
