@@ -5,12 +5,32 @@
 {% block content %}
 <h1> Converter </h1>
 <form method="get">
-    <p> Give your sequence:
-    <input type="text" name="seq">
+    <p>
+        Give your sequence:
     </p>
-    <p>Translation:
-        {{ translate }}
-    </p>
-    <button type="submit"> Submit </button>
+    <div>
+        <input type="text" name="seq">
+        <input type="submit" value="Submit">
+    </div>
 </form>
+{% if type is defined %}
+    <p>
+        {{ type[1] }}
+    </p>
+    {% if type[0] == "dna" %}
+        <p>
+            The RNA is:
+            {{ info[0] }}
+    
+        </p>
+        <p>
+            The protein is:
+            {{ info[1] }}
+        </p>
+    {% elif type[0] == "protein" %}
+        <p>
+            {{ info }}
+        </p>
+    {% endif %}
+{% endif %}
 {% endblock %}

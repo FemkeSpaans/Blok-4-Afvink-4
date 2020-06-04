@@ -12,15 +12,23 @@ import re
 
 
 def input(seq):
+    # Altijd weten WAT het is.
+    # Als het DNA is, RNA en eiwit geven.
+    # Als het een eiwit is, meerst waarschijnlijke gen geven.
     number = check(seq)
+    info = ""
     if number == 0:
-        dna(seq)
+        type = ("dna", "This is DNA.")
+        info = dna(seq)
     elif number == 1:
-        rna(seq)
+        type = ("rna", "This is RNA.")
+        info = rna(seq)
     elif number == 2:
-        protein(seq)
+        type = ("protein", "This is a Protein.")
+        info = protein(seq)
     else:
         print("This is not DNA, RNA or a protein")
+    return type, info
 
 
 def check(seq):
@@ -55,30 +63,30 @@ def dna(seq):
     """
     try:
         coding_dna = Seq(seq, IUPAC.unambiguous_dna)
-        template_dna = coding_dna.reverse_complement()
-        print("The corresponding mRNA to this sequence is:", template_dna)
+        rna = coding_dna.reverse_complement()
+        print("The corresponding mRNA to this sequence is:", rna)
         # messenger_rna = Seq(seq, IUPAC.unambiguous_rna)
         # print(messenger_rna, "oke")
         protein = coding_dna.translate()
         print("The corresponding protein to this sequence is:", protein)
+        return (rna, protein)
     except BiopythonWarning:
         pass
 
 
 def rna(seq):
-    """
+    """prints rna seq
 
     :param seq:
-    :return:
     """
     print("This is an RNA sequence:", seq)
 
 
 def protein(seq):
-    """
-
+    """blast a seq and put in xml file, 
+    open xml file and iterate over it to get gene names
     :param seq:
-    :return:
+    :return alignment.hit_def:
     """
     blast = NCBIWWW.qblast('tblastn', 'nr', seq)
     print(blast)
@@ -90,3 +98,4 @@ def protein(seq):
             for alignment in blast_record.alignments:
                 print("Gene that this protein most likely related to:"
                         "", alignment.hit_def)
+    return alignment.hit_def

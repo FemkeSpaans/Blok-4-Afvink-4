@@ -1,13 +1,26 @@
 body {
-  background-color: lightblue;
+  background-color: lightgreen;
 }
 
 h1 {
-  color: white;
-  text-align: center;
+    color: white;
+    text-align: center;
+    font-family: "american Typewriter", serif;
+    font-style: italic;
+    font-size: 40px;
 }
 
 p {
-  font-family: verdana;
-  font-size: 20px;
+    color: white;
+    text-align: center;
+    font-family: "american Typewriter", serif;
+    font-size: 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 48px;
 }
