@@ -63,7 +63,7 @@ def dna(seq):
     """
     try:
         coding_dna = Seq(seq, IUPAC.unambiguous_dna)
-        rna = coding_dna.reverse_complement()
+        rna = coding_dna.transcribe()
         print("The corresponding mRNA to this sequence is:", rna)
         # messenger_rna = Seq(seq, IUPAC.unambiguous_rna)
         # print(messenger_rna, "oke")
